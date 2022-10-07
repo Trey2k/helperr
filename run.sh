@@ -1,0 +1,1 @@
+go run ./ --data=$(pwd)/data/
