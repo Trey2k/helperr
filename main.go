@@ -29,7 +29,7 @@ func main() {
 		ReadTimeout:  15 * time.Second,
 	}
 
-	fileServer := http.StripPrefix("/static/", http.FileServer(http.Dir("www/Jellyfin-Sign-Up")))
+	fileServer := http.StripPrefix("/static/", http.FileServer(http.Dir("static/")))
 	http.Handle("/static/", fileServer)
 
 	go srv.ListenAndServe()
