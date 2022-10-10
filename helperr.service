@@ -3,6 +3,8 @@ Description=helperr
 
 [Service]
 Type=simple
+User=helperr
+Group=helperr
 Restart=always
 RestartSec=5s
 ExecStart=/var/lib/helperr
