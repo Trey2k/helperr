@@ -19,16 +19,20 @@ func main() {
 	}
 
 	r := mux.NewRouter()
-	r.HandleFunc("/invite/{id}", InviteHandler)
+	http.HandleFunc("/", httpInterceptor(r))
+	r.HandleFunc("/invite/{id}", helperr.InviteHandler).Methods("GET")
+	r.HandleFunc("/invite/{id}", helperr.SignUpHandler).Methods("POST")
 	srv := &http.Server{
-		Handler: r,
-		Addr:    fmt.Sprintf("%s:%d", common.Config.IP, common.Config.Port),
+		Addr: fmt.Sprintf("%s:%d", common.Config.IP, common.Config.Port),
 		// Good practice: enforce timeouts for servers you create!
 		WriteTimeout: 15 * time.Second,
 		ReadTimeout:  15 * time.Second,
 	}
 
-	go common.ErrorLogger.Fatal(srv.ListenAndServe())
+	fileServer := http.StripPrefix("/static/", http.FileServer(http.Dir("www/Jellyfin-Sign-Up")))
+	http.Handle("/static/", fileServer)
+
+	go srv.ListenAndServe()
 
 	stop := make(chan os.Signal, 1)
 	signal.Notify(stop, os.Interrupt)
@@ -37,4 +41,10 @@ func main() {
 	common.InfoLogger.Println("Helperr is shutting down!")
 	helperr.Destroy()
 
+}
+
+func httpInterceptor(router http.Handler) http.HandlerFunc {
+	return func(rw http.ResponseWriter, req *http.Request) {
+		router.ServeHTTP(rw, req)
+	}
 }

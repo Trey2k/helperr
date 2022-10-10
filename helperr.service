@@ -1,0 +1,11 @@
+[Unit]
+Description=helperr
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=5s
+ExecStart=/var/lib/helperr
+
+[Install]
+WantedBy=multi-user.target

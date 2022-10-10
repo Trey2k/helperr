@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jellyfin | Sign Up</title>
+    <link rel="stylesheet" href="/static/styles/style.css">
+    <link rel="shortcut icon" href="/static/assets/images/icon.ico">
+  </head>
+  <header>
+    <img src="/static/assets/images/banner-light.png" alt="jellyfin logo">
+  </header>
+  <body>
+    <div class="center">
+      <h1>Sign Up</h1>
+      <form method="POST">
+
+        <!-- Username -->
+        <div class="text_field">
+          <input type="text" name="username" required>
+          <span></span>
+          <label>Username</label>
+        </div>
+
+        <!-- Password -->
+        <div class="text_field">
+          <input type="password" id="password" name="password" required>
+          <span></span>
+          <label>Password</label>
+        </div>
+
+        <!-- Confirm Password
+        <div class="text_field">
+          <input type="password" id="confirm_password" required>
+          <span></span>
+          <label>Confirm Password</label>
+        </div> -->
+
+        <!-- Password Strength Indicator -->
+        <p id="strengthLabel" class="indicatorLabel">
+          Password Strength:
+          <span id="strengthBadge" class="indicator">
+            ...
+          </span>
+        </p>
+
+        <!-- Submit -->
+        <input type="submit" value="Sign Up" disabled="disabled">
+
+        <!-- Login Link -->
+        <div class="login_link">
+          Already a Member? <a href="https://jellyfin.treym2k.com">Login here</a>
+        </div>
+      </form>
+    </div>
+  </body>
+  <script src="/static/scripts/strengthCheck.js"></script>
+  <!-- <script src="./scripts/validatePassword.js"></script> -->
+</html>

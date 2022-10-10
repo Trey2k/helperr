@@ -105,3 +105,22 @@ func (jf *SJellyfin) NewUser(name, password string) (*UserInfo, error) {
 	err = json.NewDecoder(resp.Body).Decode(toReturn)
 	return toReturn, err
 }
+
+func (jf *SJellyfin) GetUsers() ([]UserInfo, error) {
+	request, err := http.NewRequest("GET", fmt.Sprintf("%s/Users", jf.URI), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	resp, err := jf.doAuthRequest(request)
+	if err != nil {
+		return nil, err
+	}
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("none OK status code. %s", http.StatusText(resp.StatusCode))
+	}
+
+	toReturn := &[]UserInfo{}
+	err = json.NewDecoder(resp.Body).Decode(toReturn)
+	return *toReturn, err
+}

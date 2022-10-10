@@ -33,7 +33,12 @@ func newHelperr() (*sHelperr, error) {
 		return nil, err
 	}
 
-	//err = helperr.DiscordBot.RegisterCommand(SearchCMDInfo, helperr.searchHandler)
+	err = helperr.initInvites()
+	if err != nil {
+		return nil, err
+	}
+
+	err = helperr.DiscordBot.RegisterCommand(InviteCommandInfo, helperr.InviteCommandHandler)
 
 	return helperr, err
 }
