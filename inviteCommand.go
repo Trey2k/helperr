@@ -16,7 +16,8 @@ var InviteCommandInfo = &discordgo.ApplicationCommand{
 			Name:        "user",
 			Description: "The user to invite to jellyfin",
 			Required:    true,
-			Type:        discordgo.ApplicationCommandOptionUser,
+
+			Type: discordgo.ApplicationCommandOptionUser,
 		},
 	},
 }
