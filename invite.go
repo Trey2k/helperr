@@ -131,7 +131,7 @@ func (helperr *sHelperr) userHasAccount(discordid string) (bool, error) {
 
 	for rows.Next() {
 		var id string
-		err = rows.Scan(&discordid)
+		err = rows.Scan(&id)
 		if err != nil {
 			return true, err
 		}
