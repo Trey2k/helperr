@@ -98,7 +98,7 @@ func (helperr *sHelperr) SignUpHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	userInfo, err := helperr.JF.NewUser(username, password)
-	if err != nil {
+	if err != nil || userInfo == nil {
 		common.ErrorLogger.Printf("failed to create user '%s'", username)
 		w.WriteHeader(http.StatusInternalServerError)
 		return

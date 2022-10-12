@@ -38,6 +38,16 @@ func (helperr *sHelperr) InviteCommandHandler(s *discordgo.Session, i *discordgo
 	id, err := helperr.newInvite(options[0].UserValue(helperr.DiscordBot.Session))
 	if err != nil {
 		common.ErrorLogger.Println(err)
+		err = s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
+			Type: discordgo.InteractionResponseChannelMessageWithSource,
+			Data: &discordgo.InteractionResponseData{
+				Flags:   discordgo.MessageFlagsEphemeral,
+				Content: fmt.Sprintf("Failed to create account: %s", err),
+			},
+		})
+		if err != nil {
+			common.ErrorLogger.Println(err)
+		}
 		return
 	}
 
